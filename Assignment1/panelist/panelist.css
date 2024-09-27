@@ -1,0 +1,122 @@
+@media (min-width: 1100px ) {
+    a.navbar-brand{
+     margin-right: 30%;
+    }}
+
+
+.navbar{
+    background-color:rgb(232, 184, 232,0.3);
+    height: 20%;
+    /* padding: 30px 0px; */
+    display: flex;
+    justify-content: space-between; /* Space between logo and nav items */
+    align-items: center; /* Center items vertically */
+    padding: 10px 20px; /* Add some padding */
+}
+ 
+nav{
+    color:black;
+    
+}
+
+#logo{
+    margin-right: 10px;
+    height: 80px;
+    
+}
+
+a.navbar-brand{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-variant: small-caps;
+    font-size:35px;
+    font-style: italic;
+    font-weight: 1000;
+    
+}
+.background-image{
+    position: relative;
+    z-index: 1;
+    padding: 20px 0px;
+    margin:30px
+     
+    
+}
+
+.background-image::before{
+    content: '';
+    position:  absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* background-image: url('/photos/\ bgpic.jpeg') ; */
+     
+    background-size:cover;
+    background-position: center;
+    margin: 0px 30px;
+    opacity: 0.6;
+    z-index: -1;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+footer {
+    background-color: rgb(232, 184, 232,0.3); 
+    color: black;
+    padding: 20px;
+    text-align: center;
+}
+.contact-heading {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    font-size: 1em;}
+.contact-item i {
+        margin-right: 10px;
+        color: black;
+    }
+
+    @media (min-width: 768px) {
+        .contact-info {
+            flex-direction: row; /* Change to row layout on larger screens */
+            justify-content: center;
+        }
+        .contact-item {
+            margin: 0 15px; /* Add margin between items */
+        }
+    }
+ 
+#table1, #table2 {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    display: none; /* Initially hide the table */
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    
+}
+ 
+  
+thead th:nth-child(odd) {
+   background-color:  rgb(232, 184, 232,0.5); /* Light grey */
+}
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
