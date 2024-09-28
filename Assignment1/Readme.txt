@@ -5,3 +5,10 @@ photos - this folder contains all the images used in the application.
 Similarly, admin, interview and candidate are the folders of other pages.
 All these folders must be opened together in a single folder 'Assignment1' to get directed correctly.
 You can just download the Assignment1 folder and open directly on VSCode and run.
+
+For your information
+Go to /homePage/home.html and goLive for viewing on server.
+
+If you want to login to hiring manager page, please use the credentials
+username: admin
+password: admin123
