@@ -10,14 +10,13 @@ export class AuthController {
   async candidateLogin(@Body() body) {
     const { email, password } = body;
     const candidate = await this.authService.validateCandidate(email, password);
-    return this.authService.login(candidate, 'candidate');
+    const token = await this.authService.login(candidate, 'candidate');
+    return {
+      access_token: token.access_token,
+      candidateId: candidate._id,   
+      email: candidate.email,
+    };
   }
 
-  // Panelist login
-  @Post('panelist/login')
-  async panelistLogin(@Body() body) {
-    const { email, password } = body;
-    const panelist = await this.authService.validatePanelist(email, password);
-    return this.authService.login(panelist, 'panelist');
-  }
+   
 }

@@ -33,9 +33,6 @@ let AuthService = class AuthService {
         }
         throw new common_1.UnauthorizedException('Invalid credentials');
     }
-    async validatePanelist(email, password) {
-        return this.panelistService.validatePanelist(email, password);
-    }
     async login(user, role) {
         const payload = { email: user.email, sub: user._id, role };
         return {

@@ -22,12 +22,16 @@ const roles_guard_1 = require("../auth/roles.guard");
 const roles_decorator_1 = require("../auth/roles.decorator");
 const roles_enum_1 = require("../auth/roles.enum");
 let CandidateController = class CandidateController {
-    getCandidateProfileAuth() {
-        return 'Protected candidate profile';
-    }
     constructor(candidateService, interviewService) {
         this.candidateService = candidateService;
         this.interviewService = interviewService;
+    }
+    async getCandidateProfile(email) {
+        const candidate = await this.candidateService.getCandidateByEmail(email);
+        if (!candidate) {
+            throw new common_1.NotFoundException('Candidate not found');
+        }
+        return candidate;
     }
     async register(createCandidateDto) {
         return this.candidateService.create(createCandidateDto);
@@ -64,25 +68,20 @@ let CandidateController = class CandidateController {
         }
         return candidate;
     }
-    async getCandidateProfile(email) {
-        const candidate = await this.candidateService.getCandidateByEmail(email);
-        if (!candidate) {
-            return { error: 'Candidate not found' };
-        }
-        return candidate;
-    }
     async getCandidatesForInterview(positionApplied, panelist) {
         return this.candidateService.getCandidatesByPositionAndPanelist(positionApplied, panelist);
     }
 };
 exports.CandidateController = CandidateController;
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.Candidate),
-    (0, common_1.Get)('profile'),
+    (0, common_1.Get)(':email/profile'),
+    __param(0, (0, common_1.Param)('email')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], CandidateController.prototype, "getCandidateProfileAuth", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], CandidateController.prototype, "getCandidateProfile", null);
 __decorate([
     (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),
@@ -127,13 +126,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CandidateController.prototype, "loginCandidate", null);
 __decorate([
-    (0, common_1.Post)('profile'),
-    __param(0, (0, common_1.Body)('email')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], CandidateController.prototype, "getCandidateProfile", null);
-__decorate([
     (0, common_1.Post)('interview-candidates'),
     __param(0, (0, common_1.Body)('positionApplied')),
     __param(1, (0, common_1.Body)('panelist')),
@@ -143,7 +135,6 @@ __decorate([
 ], CandidateController.prototype, "getCandidatesForInterview", null);
 exports.CandidateController = CandidateController = __decorate([
     (0, common_1.Controller)('candidates'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     __metadata("design:paramtypes", [candidate_service_1.CandidateService,
         interview_service_1.InterviewsService])
 ], CandidateController);

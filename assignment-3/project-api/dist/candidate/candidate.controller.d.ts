@@ -4,8 +4,8 @@ import { InterviewsService } from '../interview/interview.service';
 export declare class CandidateController {
     private readonly candidateService;
     private readonly interviewService;
-    getCandidateProfileAuth(): string;
     constructor(candidateService: CandidateService, interviewService: InterviewsService);
+    getCandidateProfile(email: string): Promise<import("./interfaces/candidate.interface").Candidate>;
     register(createCandidateDto: CreateCandidateDto): Promise<import("./interfaces/candidate.interface").Candidate>;
     findAll(): Promise<import("./interfaces/candidate.interface").Candidate[]>;
     updateStatus(id: string, status: string): Promise<import("./interfaces/candidate.interface").Candidate>;
@@ -26,9 +26,6 @@ export declare class CandidateController {
         candidates: any[];
     }>;
     loginCandidate(email: string): Promise<import("./interfaces/candidate.interface").Candidate | {
-        error: string;
-    }>;
-    getCandidateProfile(email: string): Promise<import("./interfaces/candidate.interface").Candidate | {
         error: string;
     }>;
     getCandidatesForInterview(positionApplied: string, panelist: string): Promise<import("./interfaces/candidate.interface").Candidate[]>;

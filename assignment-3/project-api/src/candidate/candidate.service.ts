@@ -11,23 +11,20 @@ export class CandidateService {
   ) {}
 
 
-  // async create(createCandidateDto: CreateCandidateDto): Promise<Candidate> {
-  //   const createdCandidate = new this.candidateModel(createCandidateDto);
-  //   return createdCandidate.save();
-  // }
+   
 
   async create(createCandidateDto: CreateCandidateDto): Promise<Candidate> {
-    // Hash the password before saving
-    const salt = await bcrypt.genSalt();  // Generate salt
+    // Hashing the password  
+    const salt = await bcrypt.genSalt();  
     const hashedPassword = await bcrypt.hash(createCandidateDto.password, salt);  // Hash the password
   
-    // Create a new candidate object with the hashed password
+    // creating a new candidate object with the hashed password
     const createdCandidate = new this.candidateModel({
       ...createCandidateDto,
-      password: hashedPassword,  // Save the hashed password instead of the plain text password
+      password: hashedPassword,   
     });
   
-    // Save the candidate to the database
+     
     return createdCandidate.save();
   }
 

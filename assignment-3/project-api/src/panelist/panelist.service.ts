@@ -29,37 +29,21 @@ assignPanelistToCandidate(candidateId: string, panelistName: string) {
     throw new Error('Panelist not available or not found');
   }
 }
-// validatePanelistLogin(email: string) {
-//   const panelist = this.panelists.find(p => p.email === email);
-//   if (!panelist) {
-//     throw new Error('Panelist not found');
-//   }
-//   return panelist;
-// }
+
 
 async validatePanelist(email: string, password: string): Promise<any> {
-  // Find panelist by email
+   
   const panelist = this.panelists.find(p => p.email === email);
   if (!panelist) {
     throw new UnauthorizedException('Invalid credentials');
   }
 
-  // Compare the provided password with the hardcoded hashed password
-  //const isPasswordMatching = await bcrypt.compare(password, panelist.password);
+   
   if ( password != panelist.password) {
     throw new UnauthorizedException('Invalid credentials');
   }
 
-  return panelist;  // Return the panelist if credentials are valid
+  return panelist;  
 }
-getPanelistInterviews(panelistName: string) {
-  const allInterviews = [
-    { panelist: 'Alice Johnson', position: 'Software Engineer', date: '2024-11-05', candidates: ['John Doe', 'Cindy Smith'] },
-    { panelist: 'Bob Smith', position: 'System Analyst', date: '2024-11-10', candidates: ['John Smith', 'Peter Pan'] },
-    { panelist: 'Charlie Brown', position: 'Data Scientist', date: '2024-11-15', candidates: ['Peter Pan', 'Paul Suzan'] }
-  ];
-
-   
-  return allInterviews.filter(interview => interview.panelist === panelistName);  
-}
+ 
 }

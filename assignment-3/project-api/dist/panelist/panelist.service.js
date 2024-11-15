@@ -41,14 +41,6 @@ let PanelistService = class PanelistService {
         }
         return panelist;
     }
-    getPanelistInterviews(panelistName) {
-        const allInterviews = [
-            { panelist: 'Alice Johnson', position: 'Software Engineer', date: '2024-11-05', candidates: ['John Doe', 'Cindy Smith'] },
-            { panelist: 'Bob Smith', position: 'System Analyst', date: '2024-11-10', candidates: ['John Smith', 'Peter Pan'] },
-            { panelist: 'Charlie Brown', position: 'Data Scientist', date: '2024-11-15', candidates: ['Peter Pan', 'Paul Suzan'] }
-        ];
-        return allInterviews.filter(interview => interview.panelist === panelistName);
-    }
 };
 exports.PanelistService = PanelistService;
 exports.PanelistService = PanelistService = __decorate([

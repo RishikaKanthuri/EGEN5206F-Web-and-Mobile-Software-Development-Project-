@@ -6,10 +6,4 @@ export declare class PanelistService {
         message: string;
     };
     validatePanelist(email: string, password: string): Promise<any>;
-    getPanelistInterviews(panelistName: string): {
-        panelist: string;
-        position: string;
-        date: string;
-        candidates: string[];
-    }[];
 }

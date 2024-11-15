@@ -11,24 +11,17 @@ import { Role } from '../auth/roles.enum';
 export class PanelistController {
   constructor(private readonly panelistService: PanelistService) {}
  
-  @Roles(Role.Panelist)
-  @Get('interviews')
-  getPanelistInterviews() {
-    return 'Protected panelist interviews';
-  }
+   
 
   @Get()
   async findAll() {
     return this.panelistService.findAll();
   }
 
-  //  @Post('login')
-  //  login(@Body('email') email: string) {
-  //    return this.panelistService.validatePanelistLogin(email);
-  //  }
+   
  
-   @Post('interviews')
-   getInterviews(@Body('panelistName') panelistName: string) {
-     return this.panelistService.getPanelistInterviews(panelistName);
-   }
+  //  @Post('interviews')
+  //  getInterviews(@Body('panelistName') panelistName: string) {
+  //    return this.panelistService.getPanelistInterviews(panelistName);
+  //  }
 }

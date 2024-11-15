@@ -22,12 +22,12 @@ let AuthController = class AuthController {
     async candidateLogin(body) {
         const { email, password } = body;
         const candidate = await this.authService.validateCandidate(email, password);
-        return this.authService.login(candidate, 'candidate');
-    }
-    async panelistLogin(body) {
-        const { email, password } = body;
-        const panelist = await this.authService.validatePanelist(email, password);
-        return this.authService.login(panelist, 'panelist');
+        const token = await this.authService.login(candidate, 'candidate');
+        return {
+            access_token: token.access_token,
+            candidateId: candidate._id,
+            email: candidate.email,
+        };
     }
 };
 exports.AuthController = AuthController;
@@ -38,13 +38,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "candidateLogin", null);
-__decorate([
-    (0, common_1.Post)('panelist/login'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "panelistLogin", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

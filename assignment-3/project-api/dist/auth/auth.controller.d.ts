@@ -4,8 +4,7 @@ export declare class AuthController {
     constructor(authService: AuthService);
     candidateLogin(body: any): Promise<{
         access_token: string;
-    }>;
-    panelistLogin(body: any): Promise<{
-        access_token: string;
+        candidateId: any;
+        email: any;
     }>;
 }

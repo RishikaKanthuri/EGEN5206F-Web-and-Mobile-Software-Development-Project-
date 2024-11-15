@@ -9,18 +9,26 @@ import { Role } from '../auth/roles.enum';
 
 
 @Controller('candidates')
-@UseGuards(JwtAuthGuard, RolesGuard)
+
 export class CandidateController {
-  @Roles(Role.Candidate)
-  @Get('profile')
-  getCandidateProfileAuth() {
-    return 'Protected candidate profile';
-  }
+  
   constructor(
     private readonly candidateService: CandidateService,
     private readonly interviewService: InterviewsService
     
   ) {}
+
+  
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Candidate)
+  @Get(':email/profile')
+  async getCandidateProfile(@Param('email') email: string) {
+    const candidate = await this.candidateService.getCandidateByEmail(email);
+    if (!candidate) {
+      throw new NotFoundException('Candidate not found');
+    }
+    return candidate;
+  }
 
   @Post('register')
   async register(@Body() createCandidateDto: CreateCandidateDto) {
@@ -40,29 +48,14 @@ export class CandidateController {
   async submitFeedback(@Body() feedbackData: any) {
     return this.candidateService.updateCandidateResult(feedbackData);
   }
-  // @Post('apply/:candidateId')
-  //   async applyForPosition(
-  //       @Param('candidateId') candidateId: string,
-  //       @Body() body: { position: string },
-  //   ) {
-  //       const { position } = body;
-
-         
-  //       await this.candidateService.updateCandidatePosition(candidateId, position);
-
-        
-  //       return this.interviewService.addCandidateToInterview(candidateId, position);
-  //   }
-
+  
   @Post('apply/:interviewName')
     async applyForInterview(
         @Param('interviewName') interviewName: string,
         @Body() body: { email: string, education: string, skills: string, positionApplied: string }
     ) {
         const { email, education, skills, positionApplied } = body;
-
-        // Find candidate by name and update details
-
+        
         const candidate = await this.candidateService.updateCandidateDetailsByEmail(email, {
             education,
             skills,
@@ -73,7 +66,7 @@ export class CandidateController {
             throw new NotFoundException(`Candidate not found`);
         }
 
-        // Add candidate to the interview's candidates array based on interviewName
+         
         const updatedInterview = this.interviewService.addCandidateToInterviewByName(interviewName,candidate._id.toString());
         if (!updatedInterview) {
           throw new NotFoundException(`Interview with name ${interviewName} not found`);
@@ -90,15 +83,7 @@ export class CandidateController {
     }
     return candidate;
   }
-   
-  @Post('profile')
-  async getCandidateProfile(@Body('email') email: string) {
-    const candidate = await this.candidateService.getCandidateByEmail(email);
-    if (!candidate) {
-      return { error: 'Candidate not found' };
-    }
-    return candidate;
-  }
+  
 
   @Post('interview-candidates')
   async getCandidatesForInterview(@Body('positionApplied') positionApplied: string, @Body('panelist') panelist: string) {

@@ -10,7 +10,7 @@ async function loadPanelists() {
         <tr>
           <td>${panelist.name}</td>
           <td>${panelist.expertise}</td>
-          <td>${panelist.availability ? 'Available' : 'Unavailable'}</td>
+           
           <td><button class="btn btn-primary" onclick="openAssignModal('${panelist.name}')">Assign</button></td>
         </tr>
       `;
@@ -19,13 +19,12 @@ async function loadPanelists() {
   }
 
   //Assign Candidates
-  // Open the assign modal and populate candidate select options
 async function openAssignModal(panelistName) {
   try {
-      // Store selected panelist name
+       
       document.getElementById('selectedPanelist').value = panelistName;
 
-      // Fetch candidates for the dropdown
+       
       const response = await fetch('http://localhost:3000/candidates');
       
       if (!response.ok) {
@@ -34,17 +33,15 @@ async function openAssignModal(panelistName) {
 
       const candidates = await response.json();
       const candidateSelect = document.getElementById('candidateSelect');
-      candidateSelect.innerHTML = ''; // Clear previous options
-
-      // Populate candidate dropdown
+      candidateSelect.innerHTML = ''; 
       candidates.forEach(candidate => {
           const option = document.createElement('option');
-          option.value = candidate._id;  // Use candidate ID to make assignments
+          option.value = candidate._id;  
           option.text = `${candidate.firstName} ${candidate.lastName} - ${candidate.positionApplied}`;
           candidateSelect.appendChild(option);
       });
 
-      // Show the modal
+      
       const modal = new bootstrap.Modal(document.getElementById('assignModal'));
       modal.show();
   } catch (error) {
@@ -53,7 +50,7 @@ async function openAssignModal(panelistName) {
   }
 }
 
-// Handle the form submission for assigning panelist
+ 
 document.getElementById('assignForm').addEventListener('submit', async function(event) {
   event.preventDefault();
   
@@ -74,10 +71,7 @@ document.getElementById('assignForm').addEventListener('submit', async function(
 
       alert(result.message);
        
-      // loadPanelists();
-      // loadCandidates();
-
-      // Close the modal after submission
+       
       const modal = bootstrap.Modal.getInstance(document.getElementById('assignModal'));
       modal.hide();
   } catch (error) {
@@ -106,9 +100,9 @@ document.getElementById('assignForm').addEventListener('submit', async function(
     });
   }
   
-  // Assign panelist to candidate (implement your own logic here)
+   
   function assignPanelist(panelistId) {
-    // Open the modal or trigger assignment logic
+     
     console.log(`Assigning panelist with ID: ${panelistId}`);
   }
   

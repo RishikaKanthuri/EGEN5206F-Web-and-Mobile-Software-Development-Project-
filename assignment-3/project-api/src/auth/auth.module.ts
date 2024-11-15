@@ -12,22 +12,22 @@ import { PanelistService } from 'src/panelist/panelist.service';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),  // Register Passport with JWT as the default strategy
+    PassportModule.register({ defaultStrategy: 'jwt' }),   
     JwtModule.registerAsync({
-      imports: [ConfigModule],  // Using ConfigModule to securely manage JWT secret and options
+      imports: [ConfigModule],   
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),  // JWT secret from environment variables
-        signOptions: { expiresIn: '60m' },  // Token expiration time
+        secret: configService.get<string>('JWT_SECRET'),   
+        signOptions: { expiresIn: '60m' },   
       }),
     }),
     MongooseModule.forFeature([
-      { name: 'Candidate', schema: CandidateSchema },  // Candidate schema for MongoDB
-      { name: 'Panelist', schema: PanelistSchema },    // Panelist schema for MongoDB
+      { name: 'Candidate', schema: CandidateSchema },   
+      { name: 'Panelist', schema: PanelistSchema },     
     ]),
   ],
-  providers: [AuthService, JwtStrategy, PanelistService],  // AuthService and JwtStrategy are used for login and authentication logic
-  controllers: [AuthController],  // AuthController handles login requests for both candidates and panelists
-  exports: [AuthService],  // Export AuthService to use it in other modules (if needed)
+  providers: [AuthService, JwtStrategy, PanelistService],   
+  controllers: [AuthController],   
+  exports: [AuthService],  
 })
 export class AuthModule {}

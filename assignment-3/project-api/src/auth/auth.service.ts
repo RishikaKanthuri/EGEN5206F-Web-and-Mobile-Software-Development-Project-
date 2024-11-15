@@ -15,7 +15,7 @@ export class AuthService {
     @InjectModel('Panelist') private panelistModel: Model<Panelist>,
   ) {}
 
-   
+   //candidate validation
   async validateCandidate(email: string, password: string): Promise<any> {
     const candidate = await this.candidateModel.findOne({ email });
     if (candidate && await bcrypt.compare(password, candidate.password) ) {
@@ -25,12 +25,9 @@ export class AuthService {
   }
  
    
-  async validatePanelist(email: string, password: string): Promise<any> {
-    return this.panelistService.validatePanelist(email, password);
-  }
-
+  
    
-  // Login and create JWT for both roles
+   
   async login(user: any, role: string) {
     const payload = { email: user.email, sub: user._id, role };
     return {

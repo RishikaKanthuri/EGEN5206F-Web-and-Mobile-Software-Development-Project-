@@ -12,10 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    
 });
-
 
 function toggleDropdown(dropdownId) {
     const dropdown = document.getElementById(dropdownId);
@@ -23,35 +20,40 @@ function toggleDropdown(dropdownId) {
         dropdown.classList.toggle('d-none');
     }
 }
+    
+function getQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    email: params.get('email')
+  };
+}
 
-document.addEventListener('DOMContentLoaded', async function() {
-     
-    const candidateEmail = localStorage.getItem('candidateEmail');
+ 
+async function fetchCandidateProfile() {
+  const { email } = getQueryParams();   
+  const token = localStorage.getItem('token');   
 
-    try {
-       
-      const response = await fetch('http://localhost:3000/candidates/profile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: candidateEmail })  // Send email to the backend to get candidate data
-      });
+  if (!email) {
+    alert('No candidate email provided.');
+    return;
+  }
 
-      const candidateData = await response.json();
+  const response = await fetch(`http://localhost:3000/candidates/${email}/profile`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,   
+    },
+  });
 
-      if (candidateData.error) {
-        alert('Candidate not found');
-        return;
-      }
-
-       
-      document.getElementById('firstName').textContent = candidateData.firstName;
-      document.getElementById('lastName').textContent = candidateData.lastName;
-      document.getElementById('email').textContent = candidateData.email;
-      
-
-     const appliedInterviewsList = document.getElementById('appliedInterviewsList');
+  if (response.ok) {
+    const candidateData = await response.json();
+    
+    document.getElementById('navbarUserName').innerText = `UserName: ${candidateData.firstName} ${candidateData.lastName}`;
+    document.getElementById('navbarEmail').innerText = `Email: ${candidateData.email}`;
+    document.getElementById('firstName').innerText = candidateData.firstName;
+    document.getElementById('lastName').innerText = candidateData.lastName;
+    document.getElementById('email').innerText = candidateData.email;
+    const appliedInterviewsList = document.getElementById('appliedInterviewsList');
      const interviewItem = `
        <li>
          <div>Interview Name: ${candidateData.positionApplied}</div>
@@ -60,8 +62,12 @@ document.addEventListener('DOMContentLoaded', async function() {
        </li>
      `;
      appliedInterviewsList.innerHTML = interviewItem; 
-    } catch (error) {
-      console.error('Error fetching candidate data:', error);
-      alert('An error occurred while fetching candidate data.');
-    }
-  });
+  } else {
+    alert('Failed to load candidate profile.');
+    window.location.href = '/login';  
+  }
+}
+
+fetchCandidateProfile();
+
+ 

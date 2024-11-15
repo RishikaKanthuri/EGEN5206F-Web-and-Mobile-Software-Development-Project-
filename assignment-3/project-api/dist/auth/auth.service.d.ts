@@ -10,7 +10,6 @@ export declare class AuthService {
     private panelistModel;
     constructor(panelistService: PanelistService, jwtService: JwtService, candidateModel: Model<Candidate>, panelistModel: Model<Panelist>);
     validateCandidate(email: string, password: string): Promise<any>;
-    validatePanelist(email: string, password: string): Promise<any>;
     login(user: any, role: string): Promise<{
         access_token: string;
     }>;
