@@ -24,6 +24,10 @@ export class AuthService {
     throw new UnauthorizedException('Invalid credentials');
   }
  
+  //panelist validation
+  async validatePanelist(email: string, password: string): Promise<any> {
+    return this.panelistService.validatePanelist(email, password);
+  }
    
   
    

@@ -1,16 +1,36 @@
-document.addEventListener('DOMContentLoaded', async function() {
-  const panelistName = localStorage.getItem('panelistName');
-  document.getElementById('panelistName').textContent = panelistName;
+// 
+function getQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    email: params.get('email')
+  };
+}
 
+
+ async function fetchPanelistProfile(){
+   
+  const panelistFirstName = localStorage.getItem('panelistFirstName');
+  const panelistLastName = localStorage.getItem('panelistLastName');
+  const panelistEmail = localStorage.getItem('panelistEmail');
+  const {email} = getQueryParams();
+  const token = localStorage.getItem('token');
+   
   const response = await fetch('http://localhost:3000/interviews/panelist', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ panelistName })
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem(token)}`  // Send JWT token for authentication
+    },
+    body: JSON.stringify({
+      "panelistEmail":  panelistEmail  
+   } )   
   });
-
+  
   const interviews = await response.json();
   const interviewsTableBody = document.querySelector('#interviewsTable tbody');
-
+  document.getElementById('panelistName').textContent = `${interviews[0].panelist}`;
+  document.getElementById('navbarUserName').innerText = `UserName: ${interviews[0].panelist}`;
+    document.getElementById('navbarEmail').innerText = `Email: ${panelistEmail}`;
   interviews.forEach(interview => {
     const row = `
       <tr>
@@ -18,27 +38,30 @@ document.addEventListener('DOMContentLoaded', async function() {
         <td>${interview.company}</td>
         <td>${new Date(interview.scheduledDate).toLocaleDateString()}</td>
         <td>
-          <button class="btn btn-primary viewCandidatesButton" data-position="${interview.position}" data-panelist="${panelistName}">View Candidates</button>
+          <button class="btn btn-primary viewCandidatesButton" data-position="${interview.position}" data-panelist="${panelistFirstName} ${panelistLastName}">View Candidates</button>
         </td>
       </tr>
     `;
     interviewsTableBody.innerHTML += row;
   });
 
-   
   document.querySelectorAll('.viewCandidatesButton').forEach(button => {
     button.addEventListener('click', async function() {
       const positionApplied = this.getAttribute('data-position');
-      const panelist = this.getAttribute('data-panelist');
+      const panelist = `${interviews[0].panelist}`;
       await showCandidates(positionApplied, panelist);
     });
   });
-});
+};
 
+ 
 async function showCandidates(positionApplied, panelist) {
   const response = await fetch('http://localhost:3000/candidates/interview-candidates', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`   
+    },
     body: JSON.stringify({ positionApplied, panelist })
   });
 
@@ -50,7 +73,6 @@ async function showCandidates(positionApplied, panelist) {
     document.getElementById('candidatesHeader').style.display = 'block';
     document.getElementById('candidatesTable').style.display = 'table';
 
-     
     candidates.forEach(candidate => {
       const row = `
         <tr>
@@ -66,3 +88,4 @@ async function showCandidates(positionApplied, panelist) {
     candidatesTableBody.innerHTML = '<tr><td colspan="4">No candidates available</td></tr>';
   }
 }
+fetchPanelistProfile();

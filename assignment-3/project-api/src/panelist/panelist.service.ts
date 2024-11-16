@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Panelist } from './interfaces/panelist.interface';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class PanelistService {
@@ -31,6 +32,8 @@ assignPanelistToCandidate(candidateId: string, panelistName: string) {
 }
 
 
+ 
+//validate panelist
 async validatePanelist(email: string, password: string): Promise<any> {
    
   const panelist = this.panelists.find(p => p.email === email);
@@ -39,11 +42,14 @@ async validatePanelist(email: string, password: string): Promise<any> {
   }
 
    
-  if ( password != panelist.password) {
+  if (password != panelist.password) {
     throw new UnauthorizedException('Invalid credentials');
   }
 
-  return panelist;  
+  return panelist;   
+}
+getPanelistByEmail(email: string) {
+  return this.panelists.find(panelist => panelist.email === email);
 }
  
 }

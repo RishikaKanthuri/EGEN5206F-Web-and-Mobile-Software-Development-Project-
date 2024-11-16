@@ -18,5 +18,22 @@ export class AuthController {
     };
   }
 
+  //Panelist login
+  @Post('panelist/login')
+async panelistLogin(@Body() body) {
+  const { email, password } = body;
+  const panelist = await this.authService.validatePanelist(email, password);  
+  
+   
+  const token = await this.authService.login(panelist, 'panelist');
+  
+   
+  return {
+    access_token: token.access_token,
+    
+    email: panelist.email
+  };
+} 
+
    
 }

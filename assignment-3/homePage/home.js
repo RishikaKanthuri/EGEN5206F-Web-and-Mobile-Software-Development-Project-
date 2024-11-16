@@ -35,41 +35,45 @@ document.getElementById('candidateLoginButton').addEventListener('click', async 
 });
 
 //panelist login handler
- 
-document.addEventListener('DOMContentLoaded', function() {
-    
-  const loginForm = document.getElementById('panelistLoginForm');
+document.getElementById('panelistLoginButton').addEventListener('click', async function (event) {
+  event.preventDefault();
   
-  loginForm.addEventListener('submit', async function(event) {
+  
     event.preventDefault();   
 
     const email = document.getElementById('panelistEmail').value;
+    const password = document.getElementById('panelistPassword').value;
 
-    try {
-      const response = await fetch('http://localhost:3000/panelists/login', {
+    const loginData = { email, password };
+
+      
+      const response = await fetch('http://localhost:3000/auth/panelist/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email })   
+        body: JSON.stringify(loginData)   
       });
 
        
-      if (!response.ok) {
-        throw new Error('Login failed. Invalid credentials.');
+      if (response.ok) {
+        const panelist = await response.json();
+        alert('Login successful!');
+       
+        
+        localStorage.setItem('token',panelist.access_token);
+        localStorage.setItem('panelistEmail', panelist.email);
+  
+        window.location.href = '/panelist/panelist.html?email=${panelistEmail}'; 
+      }
+      else {
+        alert('Invalid credentials, please try again.');
       }
 
        
-      const panelist = await response.json();
-      alert('Login successful!');
-     
-      console.log('Panelist:', panelist);
-      localStorage.setItem('panelistName', panelist.name);
-
-      window.location.href = '/panelist/panelist.html'; 
-    } catch (error) {
-      console.error('Error during login:', error);
-      alert('Login failed. Please try again.');
-    }
+      
+      
   });
-});
+
+
+       

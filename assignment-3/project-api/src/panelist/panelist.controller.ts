@@ -11,7 +11,10 @@ import { Role } from '../auth/roles.enum';
 export class PanelistController {
   constructor(private readonly panelistService: PanelistService) {}
  
-   
+  // @Post('login')
+  // login(@Body('email') email: string) {
+  //   return this.panelistService.validatePanelistLogin(email);
+  // }
 
   @Get()
   async findAll() {

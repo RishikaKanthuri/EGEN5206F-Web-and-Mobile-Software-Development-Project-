@@ -14,6 +14,7 @@ export class InterviewsService {
             position: 'Software Engineer',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Alice Johnson',
+            panelistEmail: 'alice@smarttalent.com',
             description:'Google is looking for skilled Software Engineers with experience in cloud computing and system design.',
             candidates:[]
         },
@@ -22,6 +23,7 @@ export class InterviewsService {
             position: 'System Analyst',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Bob Smith',
+            panelistEmail: 'bob@smarttalent.com',
             description: 'Facebook is seeking experienced System Analysts to join their team. As a System Analyst, you will be responsible for evaluating and implementing IT systems to meet business needs.' ,
             candidates:[]
         },
@@ -30,6 +32,7 @@ export class InterviewsService {
             position: 'Mechanical Engineer',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Luke Anthony',
+            panelistEmail: 'luke@smarttalent.com',
             description:'ABC Corporation is hiring Mechanical Engineers to design, develop, and oversee the production of mechanical systems in various industries. Candidates should have experience in CAD and industrial machinery',
             candidates:[]
         },{
@@ -37,6 +40,7 @@ export class InterviewsService {
             position: 'Civil Engineer',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Mark Andrews',
+            panelistEmail: 'mark@smarttalent.com',
             description: 'XYZ Construction is looking for Civil Engineers with expertise in structural design and urban planning. Join a team of professionals working on large-scale infrastructure projects.' ,
             candidates:[] 
         },
@@ -45,6 +49,7 @@ export class InterviewsService {
             position: 'Electronics Engineer',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Charlie Brown',
+            panelistEmail: 'charlie@smarttalent.com',
             description:  'DEF Electronics is hiring skilled Electronics Engineers with a focus on embedded systems, circuit design, and PCB development. Candidates should have knowledge of microcontrollers and signal processing.',
             candidates:[]
         },
@@ -53,6 +58,7 @@ export class InterviewsService {
             position: 'Electrical Engineer',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Charlie Brown',
+            panelistEmail: 'charlie@smarttalent.com',
             description:'GHI Power Systems is seeking Electrical Engineers to work on power distribution and grid management projects. Expertise in high-voltage systems and electrical safety is required.' ,
             candidates:[] 
         },
@@ -61,6 +67,7 @@ export class InterviewsService {
             position: 'Accountant',
             scheduledDate: new Date('2023-12-01T10:00:00'),
             panelist: 'Alice Johnson',
+            panelistEmail: 'alice@smarttalent.com',
             description: 'JKL Financial Services is looking for experienced Accountants to manage financial reports, audits, and tax filings. Strong skills in financial analysis and compliance are a must.',
             candidates:[]  
         },
@@ -100,5 +107,8 @@ export class InterviewsService {
     getInterviewsByPanelist(panelistName: string) {
         return this.interviewsData.filter(interview => interview.panelist === panelistName);
       }
-
+    async getInterviewsByPanelistEmail(panelistEmail: string)  {
+        
+        return this.interviewsData.filter(interview => interview.panelistEmail === panelistEmail);
+      }
 }

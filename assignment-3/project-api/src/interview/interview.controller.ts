@@ -10,8 +10,11 @@ export class InterviewsController {
     async getAllInterviews(){
         return this.interviewsService.findAll(); 
     }
-    @Post('panelist')
-  getInterviewsForPanelist(@Body('panelistName') panelistName: string) {
-    return this.interviewsService.getInterviewsByPanelist(panelistName);
+
+
+  @Post('panelist')
+  async getPanelistInterviews(@Body() body) {
+    const { panelistEmail } = body;  // Get panelist email from the request body
+    return this.interviewsService.getInterviewsByPanelistEmail(panelistEmail);
   }
 }
