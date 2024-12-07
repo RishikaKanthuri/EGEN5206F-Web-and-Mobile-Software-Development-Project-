@@ -1,3 +1,4 @@
+'use client'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import React from 'react';
@@ -42,7 +43,7 @@ const Navbar: React.FC=() => {
               <a className="nav-link" href="#panelistLogin">Panelist</a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="/admin/hiringManager.html">Hiring Manager</Link>
+              <Link className="nav-link" href="/admin">Hiring Manager</Link>
             </li>
             <li className="nav-item dropdown">
               <a
@@ -56,7 +57,7 @@ const Navbar: React.FC=() => {
               </a>
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="#contact">Contact Us</a></li>
-                <li><a className="dropdown-item" href="/homePage/faq.html">FAQ</a></li>
+                 
               </ul>
             </li>
              

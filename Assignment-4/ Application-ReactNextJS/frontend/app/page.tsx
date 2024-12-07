@@ -49,14 +49,14 @@ export default function HomePage() {
     const response = await fetch('http://localhost:3000/auth/panelist/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ panelistEmail, panelistPassword }),
+      body: JSON.stringify({ email:panelistEmail, password:panelistPassword }),
     });
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('panelistEmail', data.email);
       localStorage.setItem('token', data.token); 
-      //window.location.href = `/panelist/${data.email}`;
-      window.location.href = `/candidate?email=${encodeURIComponent(data.email)}`;
+      window.location.href = `/panelist?email=${encodeURIComponent(data.email)}`;
+ 
 
     } else {
       alert('Invalid credentials');

@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
  
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+ 
 
 interface Interview {
   _id: string;
@@ -55,13 +55,10 @@ export default function InterviewPage() {
   // Handle form submission
   const handleSubmit = async (e:React.FormEvent) => {
     e.preventDefault();
-    // const formDataPayload = new FormData();
-    // formDataPayload.append('positionApplied', 'Accountant');
-    // //formDataPayload.append('gender', formData.gender);
-    // formDataPayload.append('email', 'celia@123.com');
-    // formDataPayload.append('education', 'BTech');
-    // formDataPayload.append('skills',  'Abc');
-    // //formDataPayload.append('resume', formData.resume);
+    if (!selectedInterview) {
+      alert('No interview selected');
+      return;
+    }
     const payload = {
       email: formData.email,
       education: formData.education,
