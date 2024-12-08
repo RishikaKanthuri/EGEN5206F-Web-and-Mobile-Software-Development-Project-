@@ -119,8 +119,8 @@ const PanelistPage: React.FC = () => {
             {selectedInterview && (
               <>
                 <h2>Candidates for {selectedInterview}</h2>
-                <IonText>No Candidates Assigned To Panelist Yet</IonText>
-                {/* <IonGrid>
+                 
+                <IonGrid>
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -150,7 +150,7 @@ const PanelistPage: React.FC = () => {
                       </tr>
                     ))}
                   </tbody>
-                </IonGrid> */}
+                </IonGrid>
               </>
             )}
             {isFeedbackVisible && selectedCandidate && (

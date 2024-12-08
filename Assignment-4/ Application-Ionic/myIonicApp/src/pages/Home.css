@@ -47,4 +47,13 @@
   margin-right: 10px; /* Space between label and value */
 }
 
+.ion-img {
+  width: 70%;
+  max-width: 500px;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
   

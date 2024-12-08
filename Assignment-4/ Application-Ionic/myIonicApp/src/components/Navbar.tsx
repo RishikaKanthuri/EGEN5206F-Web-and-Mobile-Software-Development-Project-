@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
           <IonButton href="/interview">View Jobs</IonButton>
           <IonButton href="#candidateLogin">Candidate</IonButton>
           <IonButton href="#panelistLogin">Panelist</IonButton>
-          {/* <IonButton href="/admin">Hiring Manager</IonButton> */}
+          <IonButton href="/admin">Hiring Manager</IonButton>
         </IonButtons >
       </IonToolbar>
     </IonHeader>

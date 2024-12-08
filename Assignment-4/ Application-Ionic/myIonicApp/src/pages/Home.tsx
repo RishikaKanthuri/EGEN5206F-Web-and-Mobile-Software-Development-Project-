@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton, IonInput, IonItem, IonLabel, IonCard, IonCardHeader, IonCardContent, IonImg } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonInput, IonItem, IonLabel, IonCard, IonCardHeader, IonCardContent, IonImg, IonTitle } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -102,7 +102,7 @@ const HomePage: React.FC = () => {
     fetchInterviews();
   }, []);
 
-  // Render Forms
+   
   return (
     <IonPage>
       <Navbar />
@@ -113,14 +113,14 @@ const HomePage: React.FC = () => {
             {/* Candidate Login Card */}
             <IonCard>
               <IonImg src="/photos/candidates.webp" alt="Candidates" />
-              <IonCardHeader>Candidate Login</IonCardHeader>
+              <IonCardHeader><IonTitle>Candidate Login</IonTitle></IonCardHeader>
               <IonCardContent>
                 <IonItem>
-                  <IonLabel>Email</IonLabel>
+                  <IonLabel position='stacked'>Email</IonLabel>
                   <IonInput value={email} onIonChange={(e) => setEmail(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Password</IonLabel>
+                  <IonLabel position='stacked'>Password</IonLabel>
                   <IonInput type="password" value={password} onIonChange={(e) => setPassword(e.detail.value!)} />
                 </IonItem>
                 <IonButton expand="full" onClick={handleLogin}>Sign in</IonButton>
@@ -131,14 +131,14 @@ const HomePage: React.FC = () => {
             {/* Panelist Login Card */}
             <IonCard>
               <IonImg src="/photos/panelist.jpeg" alt="Panelists" />
-              <IonCardHeader>Panelist Login</IonCardHeader>
+              <IonCardHeader><IonTitle>Panelist Login</IonTitle></IonCardHeader>
               <IonCardContent>
-                <IonItem>
-                  <IonLabel>Email</IonLabel>
+                <IonItem >
+                  <IonLabel position='stacked'>Email</IonLabel>
                   <IonInput value={panelistEmail} onIonChange={(e) => setPanelistEmail(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Password</IonLabel>
+                  <IonLabel position='stacked'>Password</IonLabel>
                   <IonInput type="password" value={panelistPassword} onIonChange={(e) => setPanelistPassword(e.detail.value!)} />
                 </IonItem>
                 <IonButton expand="full" onClick={handlePanelistLogin}>Sign in</IonButton>
@@ -152,35 +152,35 @@ const HomePage: React.FC = () => {
               <IonCardHeader>Candidate Registration</IonCardHeader>
               <IonCardContent>
                 <IonItem>
-                  <IonLabel>First Name</IonLabel>
+                  <IonLabel position='stacked'>First Name</IonLabel>
                   <IonInput value={firstName} onIonChange={(e) => setFirstName(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Last Name</IonLabel>
+                  <IonLabel position='stacked'>Last Name</IonLabel>
                   <IonInput value={lastName} onIonChange={(e) => setLastName(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Email</IonLabel>
+                  <IonLabel position='stacked'>Email</IonLabel>
                   <IonInput value={email} onIonChange={(e) => setEmail(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Password</IonLabel>
+                  <IonLabel position='stacked'>Password</IonLabel>
                   <IonInput value={password} onIonChange={(e) => setPassword(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Address</IonLabel>
+                  <IonLabel position='stacked'>Address</IonLabel>
                   <IonInput value={address} onIonChange={(e) => setAddress(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>City</IonLabel>
+                  <IonLabel position='stacked'>City</IonLabel>
                   <IonInput value={city} onIonChange={(e) => setCity(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>State</IonLabel>
+                  <IonLabel position='stacked'>State</IonLabel>
                   <IonInput value={state} onIonChange={(e) => setState(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Zip</IonLabel>
+                  <IonLabel position='stacked'>Zip</IonLabel>
                   <IonInput value={zip} onIonChange={(e) => setZip(e.detail.value!)} />
                 </IonItem>
                 <IonButton expand="full" onClick={handleCandidateRegister}>Register</IonButton>
@@ -192,19 +192,19 @@ const HomePage: React.FC = () => {
               <IonCardHeader>Panelist Registration</IonCardHeader>
               <IonCardContent>
                 <IonItem>
-                  <IonLabel>Name</IonLabel>
+                  <IonLabel position='stacked'>Name</IonLabel>
                   <IonInput value={panelistName} onIonChange={(e) => setPanelistName(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Email</IonLabel>
+                  <IonLabel position='stacked'>Email</IonLabel>
                   <IonInput value={panelistEmail} onIonChange={(e) => setPanelistEmail(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Password</IonLabel>
+                  <IonLabel position='stacked'>Password</IonLabel>
                   <IonInput type="password" value={panelistPassword} onIonChange={(e) => setPanelistPassword(e.detail.value!)} />
                 </IonItem>
                 <IonItem>
-                  <IonLabel>Expertise</IonLabel>
+                  <IonLabel position='stacked'>Expertise</IonLabel>
                   <IonInput value={expertise} onIonChange={(e) => setExpertise(e.detail.value!)} />
                 </IonItem>
                 <IonItem>

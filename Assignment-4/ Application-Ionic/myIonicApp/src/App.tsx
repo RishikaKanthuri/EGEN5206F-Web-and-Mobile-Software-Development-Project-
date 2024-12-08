@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import InterviewPage from './pages/Interview';
 import Candidate from './pages/Candidate';
 import Panelist from './pages/Panelist';
+import Admin from './pages/Admin';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -48,6 +49,7 @@ const App: React.FC = () => (
         <Route path="/interview" component={InterviewPage} />
         <Route path="/candidate" component={Candidate} />
         <Route path="/panelist" component={Panelist} />
+        <Route path="/admin" component={Admin} />
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>

@@ -103,6 +103,14 @@ const CandidatePage: React.FC = () => {
               <IonLabel position="stacked">Email</IonLabel>
               <IonInput value={candidate?.email} readonly />
             </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Education</IonLabel>
+              <IonInput value={candidate?.education} readonly />
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Skills</IonLabel>
+              <IonInput value={candidate?.skills} readonly />
+            </IonItem>
           </IonCardContent>
         </IonCard>
 
