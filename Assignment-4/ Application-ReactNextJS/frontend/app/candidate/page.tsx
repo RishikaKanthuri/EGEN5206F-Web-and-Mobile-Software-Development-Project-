@@ -1,13 +1,10 @@
  'use client';
-
-
-
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+ 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface CandidateData {
@@ -17,6 +14,8 @@ interface CandidateData {
   positionApplied: string;
   status: string;
   result: string;
+  skills:string;
+  education:string;
 }
 
 const CandidatePage: React.FC = () => {
@@ -71,7 +70,7 @@ const CandidatePage: React.FC = () => {
     return <div className="container mt-5"><h3>Loading Candidate Profile...</h3></div>;
   }
 
-  // Render Error State
+   
   if (error) {
     return <div className="container mt-5"><h3 className="text-danger">{error}</h3></div>;
   }
@@ -89,6 +88,8 @@ const CandidatePage: React.FC = () => {
           <p><strong>First Name:</strong> {candidate?.firstName}</p>
           <p><strong>Last Name:</strong> {candidate?.lastName}</p>
           <p><strong>Email:</strong> {candidate?.email}</p>
+          <p><strong>Education:</strong> {candidate?.education}</p>
+          <p><strong>Skills:</strong> {candidate?.skills}</p>
         </div>
       </div>
       {/* Profile Details Section */}

@@ -31,7 +31,7 @@ export default function InterviewPage() {
     const fetchInterviews = async () => {
       try {
         const response = await fetch('http://localhost:3000/interviews');
-        if (!response.ok) throw new Error('Failed to fetch interviews');
+        //if (!response.ok) throw new Error('Failed to fetch interviews');
         const data = await response.json();
         setInterviews(data);
       } catch (error) {
@@ -63,8 +63,13 @@ export default function InterviewPage() {
       email: formData.email,
       education: formData.education,
       skills: formData.skills,
-      positionApplied: selectedInterview?.position, // Ensure you send the correct position
+      positionApplied: selectedInterview?.position,  
     };
+  //   const formDataPayload = new FormData();
+  // formDataPayload.append('email', formData.email);
+  // formDataPayload.append('education', formData.education);
+  // formDataPayload.append('skills', formData.skills);
+  // formDataPayload.append('positionApplied', selectedInterview?.position); 
     try {
       const response = await fetch(`http://localhost:3000/candidates/apply/${selectedInterview?.position}`, {
         method: 'POST',
@@ -104,8 +109,7 @@ export default function InterviewPage() {
         <>
           <h2>Featured Interviews</h2>
           <div className="row">
-            {interviews.length > 0 ? (
-              interviews.map((interview) => (
+            {interviews.map((interview) => (
               <div key={interview._id} className="col-md-4">
                 <div className="card mb-4">
                   <div className="card-body">
@@ -119,9 +123,7 @@ export default function InterviewPage() {
                 </div>
               </div>
             ))
-          ) : (
-            <p>No interviews available at the moment.</p>
-          )}
+            }
             
           </div>
         </>

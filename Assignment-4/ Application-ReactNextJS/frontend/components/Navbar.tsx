@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import React from 'react';
 import Link  from 'next/link';
-
+ 
 const Navbar: React.FC=() => {
   return (
     <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-lightstyle={{ backgroundColor: 'rgba(232, 184, 232, 0.3)' }}">
